@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
+<head>
+	<meta charset="UTF-8">
+	<title>HOME</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/log.png">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+    	header {background-color: #25292e !important; color: #000 !important;}
+    </style>
+</head>
+<body>
+	<header class="container-fluid">
+		<nav class="navbar bg-body-tertiary" style="background-color: #25292e !important;">
+		  <div class="container-fluid">
+		    <a href="/" class="navbar-brand" style="color: #fff !important;">HOME</a>
+		    <div class="btn-group" role="group" sec:authorize="!isAuthenticated()">
+		    	<a href="/signIn" class="btn btn-outline-success">Sign in</a>
+		    	<a href="/signUp" class="btn btn-outline-success">Sign up</a>
+		    </div>
+		    <div class="btn-group" role="group" sec:authorize="isAuthenticated()">
+		    	<a href="#" class="btn btn-outline-success" sec:authentication="name"></a>
+		    	<a href="/logout" class="btn btn-outline-success">Logout</a>
+		    </div>
+		  </div>
+		</nav>
+	</header>
+	<main class="container">
+		<h1 class="text-center">사용자 목록</h1>
+		<div class="list-group">
+			<th:block th:each="row : ${result}">
+		  		<a href="#" class="list-group-item list-group-item-action">
+		  			<span th:text="${row.username}"></span>
+		  			[<span th:text="${row.roleName}"></span>]
+		  		</a>
+		  	</th:block>
+		</div>
+	</main>
+</body>
+</html>
