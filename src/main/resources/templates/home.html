@@ -28,15 +28,21 @@
 		</nav>
 	</header>
 	<main class="container">
-		<h1 class="text-center">사용자 목록</h1>
-		<div class="list-group">
-			<th:block th:each="row : ${result}">
-		  		<a href="#" class="list-group-item list-group-item-action">
-		  			<span th:text="${row.username}"></span>
-		  			[<span th:text="${row.roleName}"></span>]
-		  		</a>
-		  	</th:block>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+		  <h1 class="text-center">관리자</h1>
 		</div>
+		<div sec:authorize="hasRole('ROLE_USER')">
+		  <h1 class="text-center">사용자</h1>
+		</div>
+<!-- 		<h1 class="text-center">사용자 목록</h1> -->
+<!-- 		<div class="list-group"> -->
+<!-- 			<th:block th:each="row : ${result}"> -->
+<!-- 		  		<a href="#" class="list-group-item list-group-item-action"> -->
+<!-- 		  			<span th:text="${row.username}"></span> -->
+<!-- 		  			[<span th:text="${row.roleName}"></span>] -->
+<!-- 		  		</a> -->
+<!-- 		  	</th:block> -->
+<!-- 		</div> -->
 	</main>
 </body>
 </html>

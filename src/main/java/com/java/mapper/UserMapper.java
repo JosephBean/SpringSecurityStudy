@@ -28,8 +28,8 @@ public interface UserMapper {
 			+ " WHERE a.`delYn` = 0")
 	public List<UserDTO> findALL();
 
-	@Select("SELECT * FROM `user` WHERE `delYn` = 0 AND name = #{username}")
-	public UserDTO findByUser(String username);
+	@Select("SELECT * FROM `user` WHERE `delYn` = 0 AND email = #{email}")
+	public UserDTO findByUser(String email);
 	
 	@Select("SELECT * FROM `role` WHERE `no` = (SELECT `roleNo` FROM `user_role` AS a WHERE a.`userNo` = #{no})")
 	public RoleDTO findByRole(int no);
@@ -38,7 +38,7 @@ public interface UserMapper {
 	@Insert("INSERT INTO `user` (`name`, `pwd`, `email`, `phone`) VALUE (#{name}, #{pwd}, #{email}, #{phone})")
 	public int save(UserDTO user);
 	
-	@Insert("INSERT INTO `user_role` (#{userNo}, #{roleNo})")
+	@Insert("INSERT INTO `user_role` VALUE (#{userNo}, #{roleNo})")
 	public int saveUserRole(UserRole userRole);
 	
 }
